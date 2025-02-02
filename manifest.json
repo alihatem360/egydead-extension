@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "تصفية الأفلام المدبلجة",
+  "version": "1.0",
+  "description": "إضافة تقوم بإظهار الأفلام المدبلجة فقط على موقع EgyDead.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["*://egydeadw.sbs/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://egydeadw.sbs/category/افلام-كرتون"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "extensionImage.png",
+      "48": "extensionImage.png",
+      "128": "extensionImage.png"
+    }
+  },
+  "icons": {
+    "16": "extensionImage.png",
+    "48": "extensionImage.png",
+    "128": "extensionImage.png"
+  }
+}
