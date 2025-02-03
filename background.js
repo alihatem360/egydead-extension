@@ -1,1 +1,3 @@
-console.log("الإضافة شغالة في الخلفية.");
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.storage.local.set({ filterEnabled: true });
+});

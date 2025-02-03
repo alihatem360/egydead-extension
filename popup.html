@@ -4,26 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تصفية الأفلام المدبلجة</title>
+    <title>فلتر الأفلام</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             text-align: center;
-            width: 200px;
-            padding: 10px;
         }
 
-        h2 {
-            color: #333;
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 300px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button:focus {
+            outline: none;
         }
     </style>
 </head>
 
 <body>
-    <h2>🎬 تصفية الأفلام المدبلجة</h2>
-    <p>تقوم الإضافة بإظهار الأفلام المدبلجة فقط على موقع EgyDead.</p>
-    <p>استمتع بالمشاهدة! 🍿</p>
-    <button id="toggleButton">إيقاف التصفية</button>
+    <div class="container">
+        <h3>تصفية الأفلام</h3>
+        <button id="toggleFilter">تحميل...</button>
+    </div>
     <script src="popup.js"></script>
 </body>
 

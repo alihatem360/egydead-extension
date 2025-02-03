@@ -1,27 +1,34 @@
-document.getElementById("toggleButton").addEventListener("click", () => {
-  chrome.storage.local.get("filterEnabled", (data) => {
-    const filterEnabled = !data.filterEnabled;
-    chrome.storage.local.set({ filterEnabled });
-    document.getElementById("toggleButton").textContent = filterEnabled
-      ? "إيقاف التصفية"
-      : "تشغيل التصفية";
+const button = document.getElementById("toggleFilter");
+
+chrome.storage.local.get("filterEnabled", ({ filterEnabled }) => {
+  button.textContent = filterEnabled ? "إيقاف الفلترة" : "تشغيل الفلترة";
+  button.style.backgroundColor = filterEnabled ? "red" : "green";
+});
+
+button.addEventListener("click", () => {
+  chrome.storage.local.get("filterEnabled", ({ filterEnabled }) => {
+    const newState = !filterEnabled;
+    chrome.storage.local.set({ filterEnabled: newState });
+    button.textContent = newState ? "إيقاف الفلترة" : "تشغيل الفلترة";
+    button.style.backgroundColor = newState ? "red" : "green";
+
+    // التأكد من وجود tab مفتوح ومطابق للرابط
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      chrome.scripting.executeScript({
-        target: { tabId: tabs[0].id },
-        function: toggleFilter,
-        args: [filterEnabled],
-      });
+      if (
+        tabs[0]?.url?.includes(
+          "egydeadw.sbs/category/%D8%A7%D9%81%D9%84%D8%A7%D9%85-%D9%83%D8%B1%D8%AA%D9%88%D9%86"
+        )
+      ) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+          action: "toggleFilter",
+          enabled: newState,
+        });
+
+        // إعادة تحميل الصفحة بعد تغيير الحالة
+        chrome.tabs.reload(tabs[0].id);
+      } else {
+        console.log("الصفحة الحالية مش مطابقة للـ URL المحدد");
+      }
     });
   });
 });
-
-function toggleFilter(filterEnabled) {
-  if (filterEnabled) {
-    filterMovies();
-  } else {
-    const movieItems = document.querySelectorAll(".movieItem");
-    movieItems.forEach((movie) => {
-      movie.style.display = "block";
-    });
-  }
-}

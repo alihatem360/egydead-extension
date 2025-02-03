@@ -1,30 +1,25 @@
 {
   "manifest_version": 3,
-  "name": "تصفية الأفلام المدبلجة",
+  "name": "فلتر الأفلام",
   "version": "1.0",
-  "description": "إضافة تقوم بإظهار الأفلام المدبلجة فقط على موقع EgyDead.",
-  "permissions": ["activeTab", "scripting", "storage"],
-  "host_permissions": ["*://egydeadw.sbs/*"],
+  "description": "فلترة الأفلام المدبلجة فقط",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["*://egydeadw.sbs/category/*"],
   "background": {
     "service_worker": "background.js"
   },
-  "content_scripts": [
-    {
-      "matches": ["*://egydeadw.sbs/category/افلام-كرتون"],
-      "js": ["content.js"]
-    }
-  ],
   "action": {
     "default_popup": "popup.html",
-    "default_icon": {
-      "16": "extensionImage.png",
-      "48": "extensionImage.png",
-      "128": "extensionImage.png"
-    }
+    "default_icon": "extensionImage.png"
   },
-  "icons": {
-    "16": "extensionImage.png",
-    "48": "extensionImage.png",
-    "128": "extensionImage.png"
-  }
+  "content_scripts": [
+    {
+      "matches": [
+        "*://egydeadw.sbs/category/%D8%A7%D9%81%D9%84%D8%A7%D9%85-%D9%83%D8%B1%D8%AA%D9%88%D9%86/*",
+        "*://egydeadw.sbs/category/%d8%a7%d9%81%d9%84%d8%a7%d9%85-%d9%83%d8%b1%d8%aa%d9%88%d9%86/*"
+      ],
+
+      "js": ["content.js"]
+    }
+  ]
 }
